@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+
+
+	
+</head>
+<body>
+	<style type="text/css">
+	  .something-meaningful {
+		background: #655;
+		padding: .8em;
+		width:300px;
+		}
+		.something-meaningful > div {
+		background: tan;
+		border-radius: .8em;
+		padding: 1em;
+		}
+
+		.something-meaningful2{
+			background: tan;
+			border-radius: .8em;
+			padding: 1em;
+			box-shadow: 0 0 0 .6em #655;
+			outline: .6em solid #655;
+			width:300px;
+		}
+		.gr{
+			background: #58a;
+background-image:
+linear-gradient(white 1px, transparent 0),
+linear-gradient(90deg, white 1px, transparent 0);
+background-size: 30px 30px;
+			width: 100px;
+			height: 100px;
+		}
+     </style>
+
+	<div class="something-meaningful"><div>
+	I have a nice subtle inner rounding,
+	don't I look pretty?
+	</div></div>
+
+	<div class="something-meaningful2">
+	I have a nice subtle inner rounding,
+	don't I look pretty?
+	</div>
+
+	<div class="gr"></div>
+
+	<script type="text/javascript">
+
+		//make it easier to loop over a set of elements
+		function $$(selector,context){
+			context = context || document;
+			var elements = context.querySelectorAll(selector);
+			return Array.prototype.slice.call(elements);
+		}
+
+		//check whether a property is existence
+		function testProperty(property){
+			var root = document.documentElement;
+			if(property in root.style){
+				 root.classList.add(property.toLowerCase());
+				 return true;
+			}
+		}
+		//If we want to test a value, we need to assign it to the property and check if
+		//the browser retains it.
+		function testValue(id,value,property){
+			var dummy = document.createElement('p');
+			dummy.style[property] = value;
+			if(dummy.style[property]){
+				 root.classList.add(id);
+				 return true;
+			}
+			root.classList.add('no-'+id);
+			return false;
+		}
+	</script>
+</body>
+</html>
