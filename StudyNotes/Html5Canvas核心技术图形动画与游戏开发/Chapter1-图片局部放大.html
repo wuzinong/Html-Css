@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Bouncing Balls</title>
+	<style type="text/css">
+	     body{
+	     	  background:#ddd;
+	     }
+		#canvas{
+			 margin:10px;
+			 padding:10px;
+			 background:#fff;
+			 border:thin solid #aaa;
+		}
+		#glasspane{
+			 position: absolute;
+			 left:50px;
+			 top:50px;
+			 padding:0 20px 10px 10px;
+			 background:rgba(0,0,0,.3);
+			 border:thin solid rgba(0,0,0,.6);
+			 color:#eee;
+			 font-style: 12px;
+			 cursor:pointer;
+			 box-shadow:rgba(0,0,0,.5) 5px 5px 20px;
+		}
+		#glasspan h2{
+			 font-weight: normal;
+		}
+		#glasspan .title{
+			font-size: 2em;
+			color:rgba(255,255,0,.8);
+		}
+		#glasspane a:hover{
+			color:yellow;
+		}
+		#glasspane a{
+			text-decoration: none;
+			color:#ccc;
+			font-style: 3.5em;
+		}
+		#glasspan p{
+			margin:10px;
+			color:rgba(65,65,220,1);
+			font-size:12pt;
+		}
+		#rubberbandDiv{
+			border:1px solid red;
+ 
+		}
+	</style>
+</head>
+<body>
+	 <div id="controls">
+	 	<input type="button" id="resetButton" value ="reset"/>
+	 </div>
+	 <div id="rubberbandDiv"></div>
+	 <canvas id="canvas" width="800" height="520">
+	 	  Canvas not support
+	 </canvas>
+	 <script type="text/javascript">
+	 	 var canvas =document.getElementById('canvas'),
+	 	 	 context =canvas.getContext('2d'),
+	 	 	 rubberbandDiv = document.getElementById('rubberbandDiv'),
+	 	 	 resetButton = document.getElementById('resetButton'),
+	 	 	 image = new Image(),
+	 	 	 mousedown = {},
+	 	 	 rubberbandRectangle = {},
+	 	 	 dragging = false;
+
+	 	 	 function rubberhandStart(x,y){
+	 	 	 	mousedown.x = x;
+	 	 	 	mousedown.y = y;
+	 	 	 	rubberbandRectangle.left = mousedown.x;
+	 	 	 	rubberbandRectangle.top = mousedown.y;
+	 	 	 	moveRubberbandDiv();
+	 	 	 	showRubberbandDiv();
+	 	 	 	dragging= true;
+	 	 	 }
+	 	 	 function rubberbandStrench(x,y){
+	 	 	 	rubberbandRectangle.left = x < mousedown.x ? x : mousedown.x;
+	 	 	 	rubberbandRectangle.top = y < mousedown.y ? y : mousedown.y;
+	 	 	 	rubberbandRectangle.width = Math.abs(x-mousedown.x);
+	 	 	 	rubberbandRectangle.height= Math.abs(y-mousedown.y);
+	 	 	 	moveRubberbandDiv();
+	 	 	 	resizeRubberbandDiv();
+	 	 	 }
+	 	 	 function rubberbandEnd(){
+	 	 	 	var bbox = canvas.getBoundingClientRect();
+	 	 	 	try{
+	 	 	 		context.drawImage(canvas,
+	 	 	 			              rubberbandRectangle.left-bbox.left,
+	 	 	 			              rubberbandRectangle.top -bbox.top,
+	 	 	 			              rubberbandRectangle.width,
+	 	 	 			              rubberbandRectangle.height,
+	 	 	 			              0,0,canvas.width,canvas.height
+	 	 	 						 );
+	 	 	 	}
+	 	 	 	catch(e){
+
+	 	 	 	}
+	 	 	 	resetRubberbandRectangle();
+	 	 	 	rubberbandDiv.style.width = 0;
+	 	 	 	rubberbandDiv.style.height = 0;
+	 	 	 	hideRubberbandDiv();
+	 	 	 	dragging = false;
+	 	 	 }
+	 	 	 function moveRubberbandDiv(){
+	 	 	 	 rubberbandDiv.style.top = rubberbandRectangle.top + "px";
+	 	 	 	 rubberbandDiv.style.left = rubberbandRectangle.left +"px";
+	 	 	 }
+	 	 	 function resizeRubberbandDiv(){
+	 	 	 	 rubberbandDiv.style.width = rubberbandRectangle.width + "px";
+	 	 	 	 rubberbandDiv.style.height = rubberbandRectangle.height+"px";
+	 	 	 }
+	 	 	 function showRubberbandDiv(){
+	 	 	 	 rubberbandDiv.style.display = "inline";
+	 	 	 }
+	 	 	 function hideRubberbandDiv(){
+	 	 	 	 rubberbandDiv.style.display = "none";
+	 	 	 }
+	 	 	 function resetRubberbandRectangle(){
+	 	 	 	 rubberbandRectangle ={top:0,left:0,width:0,height:0};
+	 	 	 }
+	 	 	 canvas.onmousedown = function(e){
+	 	 	 	 var x = e.clientX,
+	 	 	 	     y = e.clientY;
+
+	 	 	 	     e.preventDefault();
+	 	 	 	     rubberhandStart(x,y);
+	 	 	 }
+	 	 	 window.onmousemove = function(e){
+	 	 	 	  var x = e.clientX,
+	 	 	 	      y = e.clientY;
+	 	 	 	      e.preventDefault();
+	 	 	 	      if(dragging){
+	 	 	 	      	 rubberbandStrench(x,y);
+	 	 	 	      }
+	 	 	 }
+	 	 	 window.onmouseup = function(e){
+	 	 	 	e.preventDefault();
+	 	 	 	rubberbandEnd();
+	 	 	 }
+	 	 	 image.onload = function(){
+	 	 	 	 context.drawImage(image,0,0,canvas.width,canvas.height);
+	 	 	 }
+	 	 	 resetButton.onclick = function(e){
+	 	 	 	 context.clearRect(0,0,context.canvas.width,context.canvas.height);
+	 	 	 	 context.drawImage(image,0,0,canvas.width,canvas.height);
+	 	 	 }
+	 	 	 image.src = "images/test.jpg";
+	 </script>
+</body>
+</html>

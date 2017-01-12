@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas</title>
+	<style type="text/css">
+		#canvas{
+			 margin:10px;
+			 padding:10px;
+			 border:1px solid olive;
+ 			margin-top:100px;
+		}
+	</style>
+</head>
+<body>
+	 <canvas id="canvas" width=400 height=400>
+	 	
+	 </canvas>
+	 <script type="text/javascript">
+	 	var canvas = document.getElementById("canvas"),
+	 	    context = canvas.getContext('2d');
+	 	//     console.profile("start");
+	 	//     context.font = "38pt Arial";
+	 	//     context.fillStyle = "cornflowerblue";
+	 	//     context.save();
+	 	//     context.fillStyle="black";
+	 	//     context.strokeStyle = 'blue';
+	 	//     context.restore();
+	 	//     context.fillText('HC',canvas.width/2-150,canvas.height/2+15);
+	 	//     context.strokeText("HC",canvas.width/2-150,canvas.height/2+15);
+	 	//      console.profileEnd("end");
+	 	
+
+	 	时钟应用
+	 	;(function(){
+		 	var canvas = document.getElementById("canvas"),
+		 	    context = canvas.getContext('2d'),
+		 	    FONT_HEIGHT = 15,
+		 	    MARGIN = 35,
+		 	    HAND_TRUNCATION = canvas.width/25,
+		 	    HOUR_HAND_TRUNCATION = canvas.width/10,
+		 	    NUMERAL_SPACING = 20,
+		 	    RADIUS = canvas.width/2 - MARGIN,
+		 	    HAND_RADIUS = RADIUS + NUMERAL_SPACING;
+		 	function drawCircle(){
+		 		context.beginPath();
+		 		context.arc(canvas.width/2,canvas.height/2,RADIUS,0,Math.PI*2,true);
+		 		context.strokeStyle="olive";
+		 		context.stroke();
+		 	}
+
+		 	function drawNumerals(){
+		 		var numerals = [1,2,3,4,5,6,7,8,9,10,11,12],
+		 			angle = 0,
+		 			numeralWidth = 0;
+		 			numerals.forEach(function(numeral){
+		 				angle = Math.PI/6 * (numeral -3);
+		 				numeralWidth = context.measureText(numeral).width;
+		 				//measureText() 方法返回包含一个对象，该对象包含以像素计的指定字体宽度。
+		 				context.fillText(numeral,
+		 					 canvas.width/2+Math.cos(angle)*(HAND_RADIUS)-numeralWidth/2,
+		 					 canvas.height/2+Math.sin(angle)*(HAND_RADIUS)+FONT_HEIGHT/3
+		 					);
+		 			});
+		 	}
+		    // 	context.arc(x,y,r,sAngle,eAngle,counterclockwise);
+			// x	圆的中心的 x 坐标。
+			// y	圆的中心的 y 坐标。
+			// r	圆的半径。
+			// sAngle	起始角，以弧度计。（弧的圆形的三点钟位置是 0 度）。
+			// eAngle	结束角，以弧度计。
+			// counterclockwise	可选。规定应该逆时针还是顺时针绘图。False = 顺时针，true = 逆时针。
+			//0°从三点方向开始算
+			
+			function drawCenter(){
+				context.beginPath();
+				context.arc(canvas.width/2,canvas.height/2,5,0,Math.PI*2,true);
+				context.fill();
+			}
+
+			function drawHand(loc,isHour){
+				var angle = (Math.PI*2) * (loc/60) - Math.PI/2,
+				  handRadius = isHour ? RADIUS-HAND_TRUNCATION-HOUR_HAND_TRUNCATION
+				  					  : RADIUS-HAND_TRUNCATION;
+ 				  context.moveTo(canvas.width/2,canvas.height/2);
+ 				  context.lineTo(canvas.width/2+Math.cos(angle)*handRadius,
+ 				  				 canvas.height/2 + Math.sin(angle)*handRadius);
+ 				  context.strokeStyle="purple";
+ 				  context.stroke();
+			}
+			function drawHands(){
+				 var date = new Date(),
+				 	 hour = date.getHours();
+				 hour = hour > 12?hour-12:hour;
+				 drawHand(hour*5 + (date.getMinutes()/60)*5,true,0.5);
+				 drawHand(date.getMinutes(),false,0.5);
+				 drawHand(date.getSeconds(),false,0.2);
+			}
+			function drawClock(){
+				 context.clearRect(0,0,canvas.width,canvas.height);
+				 drawCircle();
+		 		 drawCenter();
+		 		 drawHands();
+		 		 drawNumerals();
+			}
+		 	loop = setInterval(drawClock,1000);  //启动
+	 	})();
+
+	 </script>
+</body>
+</html>
