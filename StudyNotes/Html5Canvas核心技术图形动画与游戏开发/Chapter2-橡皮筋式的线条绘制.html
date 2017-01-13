@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>橡皮筋式的线条绘制</title>
+	<style type="text/css">
+	    body{
+	    	 background:#eee;
+	    }
+	    #controls{
+	    	 position: absolute;
+	    	 left:25px;
+	    	 top:25px;
+	    }
+	    #canvas{
+	    	background:#fff;
+	    	cursor:pointer;
+	    	margin-left:10px;
+	    	margin-top:10px;
+	    	box-shadow: 4px 4px 8px rgba(0,0,0,.5);
+	    }
+	</style>
+</head>
+<body>
+ 	
+	 <canvas id="canvas" width="600" height="400" style="margin:40px 40px;border:1px solid pink">
+	 	  Canvas not support
+	 </canvas>
+	 <div id="controls">
+	 	Stroke color:
+	 	<select id="strokeStyleSelect">
+	 		<option value="red">red</option>
+	 		<option value="green">green</option>
+	 		<option value="blue">blue</option>
+	 		<option value="goldenrod">goldenrod</option>
+	 		<option value="orange">orange</option>
+	 		<option value="navy">navy</option>
+	 		<option value="purple">purple</option>
+	 	</select>
+	 	Guidewires:
+	 	<input id="guidewireCheckbox" type="checkbox" checked/>
+	 	<input id="eraseAllButton" type="button" value="Erase all"/>
+	 </div>
+	 <script type="text/javascript">
+	 	var canvas = document.getElementById("canvas"),
+	 	    context= canvas.getContext("2d"),
+	 	    eraseAllButton = document.getElementById("eraseAllButton"),
+	 	    strokeStyleSelect=document.getElementById("strokeStyleSelect"),
+	 	    guidewireCheckbox=document.getElementById("guidewireCheckbox"),
+	 	    drawingSurfaceImageData,
+	 	    mousedown = {},
+	 	    rubberbandRect={},
+	 	    dragging = false,
+	 	    guidewires = guidewireCheckbox.checked;
+	 	    function drawGrid(color,stepx,stepy){
+	 	    	 context.save();
+		 	     context.strokeStyle = color;
+		 	 	 context.lineWidth = 0.5;
+		 	 	 for(var i=stepx+0.5;i<context.canvas.width;i+=stepx){
+		 	 	 	 context.beginPath();
+		 	 	 	 context.moveTo(i,0);
+		 	 	 	 context.lineTo(i,context.canvas.height);
+		 	 	 	 context.stroke();
+		 	 	 }
+		 	 	 for(var j=stepy+0.5;j<context.canvas.height;j+=stepy){
+		 	 	 	 context.beginPath();
+		 	 	 	 context.moveTo(0,j);
+		 	 	 	 context.lineTo(context.canvas.width,j);
+		 	 	 	 context.stroke();
+		 	 	 }
+		 	 	 context.restore()
+	 	    }
+	 	    function windowToCanvas(x,y){
+	 	    	var bbox = canvas.getBoundingClientRect();
+	 	    	return {
+	 	    		x:(x-bbox.left) * (canvas.width/bbox.width),
+	 	    		y:(y-bbox.top) * (canvas.height/bbox.height)
+	 	    	}
+	 	    }
+	 	    function saveDrawingSurface(){
+	 	    	 drawingSurfaceImageData = context.getImageData(0,0,canvas.width,canvas.height);
+	 	    }
+
+	 	//     var imgData=context.getImageData(x,y,width,height);
+	 	//     参数值
+			// 参数	描述
+			// x	开始复制的左上角位置的 x 坐标。
+			// y	开始复制的左上角位置的 y 坐标。
+			// width	将要复制的矩形区域的宽度。
+			// height	将要复制的矩形区域的高度。
+
+	 	    function restoreDrawingSurface(){
+	 	    	 context.putImageData(drawingSurfaceImageData,0,0);
+	 	    }
+
+	 	    function updateRubberbandRectangle(loc){
+	 	    	 rubberbandRect.width = Math.abs(loc.x-mousedown.y);
+	 	    	 rubberbandRect.height= Math.abs(loc.y-mousedown.y);
+	 	    	 if(loc.x>mousedown.x){
+	 	    	 	 rubberbandRect.left = mousedown.x;
+	 	    	 }else{
+	 	    	 	 rubberbandRect.left = loc.x;
+	 	    	 }
+
+	 	    	 if(loc.y > mousedown.y){
+	 	    	 	rubberbandRect.top = mousedown.y;
+	 	    	 }else{
+	 	    	 	rubberbandRect.top = loc.y;
+	 	    	 }
+	 	    }
+	 	    function drawRubberbandShape(loc){
+	 	    	 context.beginPath();
+	 	    	 context.moveTo(mousedown.x,mousedown.y);
+	 	    	 context.lineTo(loc.x,loc.y);
+	 	    	 context.stroke();
+	 	    }
+	 	    function updateRubberhand(loc){
+	 	    	 updateRubberbandRectangle(loc);
+	 	    	 drawRubberbandShape(loc);
+	 	    }
+
+	 	    function drawHorizontalLine(y){
+	 	    	 context.beginPath();
+	 	    	 context.moveTo(0,y+0.5);
+	 	    	 context.lineTo(context.canvas.width,y+0.5);
+	 	    	 context.stroke();
+	 	    }
+	 	    function drawVerticalLine(x){
+	 	    	 context.beginPath();
+	 	    	 context.moveTo(x+0.5,0);
+	 	    	 context.lineTo(x+0.5,context.canvas.height);
+	 	    	 context.stroke();
+	 	    }
+	 	    function drawGuidewires(x,y){
+	 	    	 context.save();
+	 	    	 context.strokeStyle="rgba(0,0,230,0.4)";
+	 	    	 context.lineWidth = 0.5;
+	 	    	 drawVerticalLine(x);
+	 	    	 drawHorizontalLine(y);
+	 	    	 context.restore();
+	 	    }
+
+	 	    //canvas event handlers
+	 	    canvas.onmousedown = function(e){
+	 	    	 var loc = windowToCanvas(e.clientX,e.clientY);
+	 	    	 e.preventDefault();
+	 	    	 saveDrawingSurface();
+	 	    	 mousedown.x = loc.x;
+	 	    	 mousedown.y = loc.y;
+	 	    	 dragging = true;
+	 	    }
+	 	    canvas.onmousemove=function(e){
+	 	    	 var loc;
+	 	    	 if(dragging){
+	 	    	 	 e.preventDefault();
+	 	    	 	 loc = windowToCanvas(e.clientX,e.clientY);
+	 	    	 	 restoreDrawingSurface();
+	 	    	 	 updateRubberhand(loc);
+	 	    	 	 if(guidewires){
+	 	    	 	 	 drawGuidewires(loc.x,loc.y);
+	 	    	 	 }
+	 	    	 }
+	 	    }
+	 	    canvas.onmouseup = function(e){
+	 	    	loc = windowToCanvas(e.clientX,e.clientY);
+	 	    	restoreDrawingSurface();
+	 	    	updateRubberhand(loc);
+	 	    	dragging = false;
+	 	    }
+	 	    //controls event handlers
+	 	    eraseAllButton.onclick = function(e){
+	 	    	 context.clearRect(0,0,canvas.width,canvas.height);
+	 	    	 drawGrid("lightgray",10,10);
+	 	    	 saveDrawingSurface();
+	 	    }
+	 	    strokeStyleSelect.onchange = function(e){
+	 	    	 context.strokeStyle = strokeStyleSelect.value;
+	 	    }
+	 	    guidewireCheckbox.onchange = function(e){
+	 	    	 guidewires = guidewireCheckbox.checked;
+	 	    }
+	 </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图案</title>
+	<style type="text/css">
+	     
+	</style>
+</head>
+<body>
+ 	 <div id="radios">
+ 	 	 <input type="radio" id="repeatRadio" name="patternRadio" checked/>repeat
+ 	 	 <input type="radio" id="repeatXRadio" name="patternRadio"/>repeat-x
+ 	 	 <input type="radio" id="repeatYRadio" name="patternRadio"/>repeat-y
+ 	 	 <input type="radio" id="noRepeatRadio" name="patternRadio"/>no-repeat
+ 	 </div>
+	 <canvas id="canvas" width="1800" height="1520">
+	 	  Canvas not support
+	 </canvas>
+	 <script type="text/javascript">
+	 	 var canvas = document.getElementById("canvas"),
+	 	     context = canvas.getContext('2d'),
+	 	     repeatRadio=document.getElementById("repeatRadio"),
+	 	     repeatXRadio=document.getElementById("repeatXRadio"),
+	 	     repeatYRadio=document.getElementById("repeatYRadio"),
+	 	     noRepeatRadio=document.getElementById("noRepeatRadio"),
+	 	     image = new Image();
+	 	  function fillCanvasWithPattern(repeatString){
+	 	      var pattern = context.createPattern(image,repeatString);
+	 	      context.clearRect(0,0,canvas.width,canvas.height);
+	 	      context.fillStyle=pattern;
+	 	      context.fillRect(0,0,canvas.width,canvas.height);
+	 	      context.fill();
+	 	  }
+	 	//   createPattern() 方法在指定的方向内重复指定的元素。
+			// 元素可以是图片、视频，或者其他 <canvas> 元素。
+			// 被重复的元素可用于绘制/填充矩形、圆形或线条等等。
+	 	  //context.createPattern(image,"repeat|repeat-x|repeat-y|no-repeat");
+	 	  //参数	描述
+			// image	规定要使用的图片、画布或视频元素。
+			// repeat	默认。该模式在水平和垂直方向重复。
+			// repeat-x	该模式只在水平方向重复。
+			// repeat-y	该模式只在垂直方向重复。
+			// no-repeat	该模式只显示一次（不重复）。
+		
+
+	 	  repeatRadio.onclick = function(e){
+	 	      fillCanvasWithPattern('repeat');
+	 	  }
+	 	  repeatXRadio.onclick = function(e){
+	 	      fillCanvasWithPattern('repeat-x');
+	 	  }
+	 	  repeatYRadio.onclick = function(e){
+	 	      fillCanvasWithPattern('repeat-y');
+	 	  }
+	 	  noRepeatRadio.onclick = function(e){
+	 	      fillCanvasWithPattern('no-repeat');
+	 	  }
+	 	  image.src = 'images/test.jpg';
+	 	  image.onload = function(e){
+	 	      fillCanvasWithPattern('repeat');
+	 	  }
+	 </script>
+</body>
+</html>

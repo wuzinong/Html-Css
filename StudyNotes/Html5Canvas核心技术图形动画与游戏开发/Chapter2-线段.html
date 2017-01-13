@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>线段</title>
+	<style type="text/css">
+	     
+	</style>
+</head>
+<body>
+ 	
+	 <canvas id="canvas" width="1000" height="1520" style="margin:40px 40px;border:1px solid pink">
+	 	  Canvas not support
+	 </canvas>
+	 <script type="text/javascript">
+	 	 //Canvas绘图环境提供了2个可以用来创建线性路径的方法：
+	 	 //moveTo()与lineTo()
+	 	 //必须在创建路径之后调用stroke()方法
+
+	 	 //在canvas中绘制两条线段
+	 	 // var context = document.getElementById("canvas").getContext("2d");
+	 	 // context.lineWidth = 1;
+	 	 // context.beginPath();
+	 	 // context.moveTo(50,10);
+	 	 // context.lineTo(450,10);
+	 	 // context.stroke();
+	 	 // context.beginPath();
+	 	 // context.moveTo(50.5,50.5);
+	 	 // context.lineTo(450.5,450.5);
+	 	 // context.stoke();
+
+	 	 //如果你在某2个像素的编辑处绘制一条1像素宽的线段那么该线段实际上会占据2个像素宽度
+	 	 //所以说，如果要绘制一条真正1像素宽的线段，你必须将该线段绘制在某2个像素之间的那个
+	 	 //像素中，而不能将它绘制在2个像素的交界处
+	 	 //
+	 	 //网格绘制
+	 	 var context = document.getElementById("canvas").getContext("2d");
+	 	 function drawGrid(context,color,stepx,stepy){
+	 	 	 context.strokeStyle = color;
+	 	 	 context.lineWidth = 0.5;
+	 	 	 for(var i=stepx+0.5;i<context.canvas.width;i+=stepx){
+	 	 	 	 context.beginPath();
+	 	 	 	 context.moveTo(i,0);
+	 	 	 	 context.lineTo(i,context.canvas.height);
+	 	 	 	 context.stroke();
+	 	 	 }
+	 	 	 context.strokeStyle = "pink";
+	 	 	 for(var j=stepy+0.5;j<context.canvas.height;j+=stepy){
+	 	 	 	 context.beginPath();
+	 	 	 	 context.moveTo(0,j);
+	 	 	 	 context.lineTo(context.canvas.width,j);
+	 	 	 	 context.stroke();
+	 	 	 }
+	 	 }
+	 	 drawGrid(context,'gray',10,10);
+	 	 //这段代码将线段绘制在了2个像素之间的像素上，而且
+	 	 //绘制出来的线段仅有0.5像素宽
+	 </script>
+</body>
+</html>

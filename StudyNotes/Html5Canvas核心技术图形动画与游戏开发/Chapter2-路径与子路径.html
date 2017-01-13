@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>阴影</title>
+	<style type="text/css">
+	     
+	</style>
+</head>
+<body>
+ 	
+	 <canvas id="canvas" width="800" height="520" style="margin:40px 40px;border:1px solid pink">
+	 	  Canvas not support
+	 </canvas>
+	 <script type="text/javascript">
+	 	 var  canvas = document.getElementById("canvas"),
+	 	 	  context = canvas.getContext("2d"),
+	 	 	  SHADOW_COLOR = 'rgba(0,0,0,0.7)';
+
+	 	 	context.fillStyle="olive";
+	 	 	setIconShadow();
+	 	    context.fillRect(0,0,200,200);
+
+	 	    context.font = "24px Arial";
+	 	    context.fillStyle="red";
+	 	    setSelectedIconShadow();
+	 	    context.fillText("Hello",210,210);
+
+	 	 function setIconShadow(){
+	 	 	 context.shadowColor = SHADOW_COLOR;
+	 	 	 context.shadowOffsetX = -4;
+	 	 	 context.shadowOffsetY = -4;
+	 	 	 context.shadowBlur = 5;
+	 	 }
+	 	 function setSelectedIconShadow(){
+	 	 	 context.shadowColor = SHADOW_COLOR;
+	 	 	 context.shadowOffsetX = 4;
+	 	 	 context.shadowOffsetY = 4;
+	 	 	 context.shadowBlur = 5;
+	 	 }
+
+
+      var ERASER_LINE_WIDTH = 1,
+      	  ERASER_SHADOW_STYLE = 'blue',
+      	  ERASER_STROKE_STYLE ='rgba(0,0,255,0.6)',
+      	  ERASER_Fill_STYLE ='rgba(0,0,255,0.6)',
+      	  ERASER_SHADOW_OFFSET = -5,
+      	  ERASER_SHADOW_BLUR = 20,
+      	  ERASER_RADIUS = 60;
+
+      function setEraserAttributes(){
+      	  context.lineWidth = ERASER_LINE_WIDTH;
+      	  context.shadowColor = ERASER_SHADOW_STYLE;
+      	  context.shadowOffsetX = ERASER_SHADOW_OFFSET;
+      	  context.shadowOffsetY = ERASER_SHADOW_OFFSET;
+      	  context.shadowBlur = ERASER_SHADOW_BLUR;
+      	  context.strokeStyle = ERASER_STROKE_STYLE;
+      	  context.fillStyle = ERASER_Fill_STYLE;
+      }
+      function drawEraser(loc){
+      	   context.save();
+      	   setEraserAttributes();
+      	   context.beginPath();
+      	   context.arc(loc.x,loc.y,ERASER_RADIUS,0,Math.PI*2,false);
+      	   context.clip();
+      	   context.fill();
+      	   context.restore();
+      }
+      canvas.onmousedown = function(e){
+      	  var x = e.clientX,
+      	  	  y = e.clientY;
+      	  var loc = getMousePos(canvas,e);
+      	  drawEraser(loc);
+      }
+
+       function getMousePos(canvas, evt) { 
+		   var rect = canvas.getBoundingClientRect(); 
+		   return {
+		     x: (evt.clientX - rect.left) * (canvas.width / rect.width),
+		     y: (evt.clientY - rect.top) * (canvas.height / rect.height)
+		   }
+		 }
+
+	 </script>
+</body>
+</html>

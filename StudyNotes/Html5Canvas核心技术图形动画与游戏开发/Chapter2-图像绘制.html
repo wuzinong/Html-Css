@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图像绘制</title>
+	<style type="text/css">
+	     
+	</style>
+</head>
+<body>
+ 
+	 <canvas id="canvas" width="800" height="520">
+	 	  Canvas not support
+	 </canvas>
+	 <script type="text/javascript">
+	 	// clearRect(double x,double y,double w,double h); //清除矩形
+	 	// strokeRect(double x,double y,double w,double h);//描边矩形
+	 	// fillRect(double x,double y,doble w,double h);//填充矩形
+	 	var canvas = document.getElementById("canvas"),
+	 	    context= canvas.getContext('2d');
+	 	    context.lineJoin = 'round';
+	 	    context.lineWidth = 30;
+	 	    context.font = '24px Helvetica';
+	 	    context.fillText('click any where to erase',175,40);
+
+ 		//线性渐变
+	    var lineargradient = context.createLinearGradient(0,0,canvas.width,0);
+	        lineargradient.addColorStop(0,'blue');
+	        lineargradient.addColorStop(0.25,'white');
+	        lineargradient.addColorStop(0.5,'purple');
+	        lineargradient.addColorStop(0.75,'red');
+	        lineargradient.addColorStop(1,'yellow');
+
+	   //      context.createLinearGradient(x0,y0,x1,y1);
+	   //      参数	描述
+				// x0	渐变开始点的 x 坐标
+				// y0	渐变开始点的 y 坐标
+				// x1	渐变结束点的 x 坐标
+				// y1	渐变结束点的 y 坐标
+
+		//径向渐变
+		var radialGradient = context.createRadialGradient(canvas.width/2,canvas.height,10,canvas.width/2,0,100);
+			radialGradient.addColorStop(0,'blue');
+			radialGradient.addColorStop(0.25,'white');
+			radialGradient.addColorStop(0.5,'purple');
+			radialGradient.addColorStop(0.75,'red');
+			radialGradient.addColorStop(1,'yellow');
+
+			//context.createRadialGradient(x0,y0,r0,x1,y1,r1);
+			// 参数	描述
+			// x0	渐变的开始圆的 x 坐标
+			// y0	渐变的开始圆的 y 坐标
+			// r0	开始圆的半径
+			// x1	渐变的结束圆的 x 坐标
+			// y1	渐变的结束圆的 y 坐标
+			// r1	结束圆的半径
+
+
+	 	    context.strokeStyle = "goldenrod"; //定义描边颜色
+	 	    //context.fillStyle = "rgba(0,0,255,0.5)"; //定义填充颜色
+	 	    //context.fillStyle = lineargradient;//使用线性渐变
+	 	    context.fillStyle = radialGradient;//使用放射渐变
+
+	 	    context.strokeRect(75,100,200,200);
+	 	    context.fillRect(325,100,200,200);
+	 	    context.canvas.onmousedown = function(e){
+	 	    	 context.clearRect(0,0,canvas.width,canvas.height);
+	 	    }
+	 </script>
+</body>
+</html>

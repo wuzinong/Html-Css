@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>路径描边与填充</title>
+	<style type="text/css">
+	     
+	</style>
+</head>
+<body>
+ 	
+	 <canvas id="canvas" width="1000" height="1520" style="margin:40px 40px;border:1px solid pink">
+	 	  Canvas not support
+	 </canvas>
+	 <script type="text/javascript">
+	 	 var canvas = document.getElementById("canvas"),
+	 	 	 context =canvas.getContext('2d');
+	 	 	 //context.fillStyle="olive";
+	 	 	 context.arc(300,300,200,0,Math.PI*2,false);//outer:ccw 外部逆时针
+	 	 	 context.stroke();
+	 	 	// context.beginPath();
+	 	 	 context.arc(300,300,100,0,Math.PI*2,true);//inner:cw 内部顺时针
+	 	 	 //context.fill();
+	 	 	context.stroke();
+	 	  //会有一条横线，根据canvas规范，当使用arc方法向当前路径中增加子路径时，
+	 	  //该方法必须将上一条子路径的终点与所画弧的起点相连
+	 	  //
+	 	 //**这里设置内外圆为相反的时针方向，内部则不会填充，反之，会填充
+	 	 //用到了非零环绕规则
+	 	 //从内部做一条射线，与内外环香蕉，从左到右，count加1，从右到左count减1
+	 	 //最后判断count如果为0，则不需要填充，不为0则填充
+	 	 //或者通过奇偶原则，做一条射线，相交点（除了顶点）
+	 	 //奇数表示在多边形内，偶数表示在多边形外（即不需要填充）
+	 	 //两个定理矛盾怎么办？
+	 	 //
+	 	 //制作剪纸图形
+	 	 function drawCutouts(){
+	 	 	 context.beginPath();
+	 	 	 addOuterRectanglePath();//clockwise (cw)
+	 	 	 addCirclePath();//counter-clockwidth (ccw)
+	 	 	 addOuterRectanglePath();//CCW
+	 	 	 addTrianglePath();//CCW
+	 	 	 context.fill();//cut out shapes
+	 	 }
+	 	 //acr()方法可以让调用者控制圆弧的绘制方向
+	 	 //**然而rect方法则没有那么方便，它总是按照顺时针方向来创建路径
+	 	 //可是，在本例这种情况下，需要的是一条逆时针的矩形路径，
+	 	 //所以我们自己创建了一个rect()方法
+	 	 function rect(x,y,w,h,direction){
+	 	 	 if(direction){//CCW  逆时针
+	 	 	 	context.moveTo(x,y);
+	 	 	 	context.lineTo(x,y+h);
+	 	 	 	context.lineTo(x+w,y+h);
+	 	 	 	context.lineTo(x+w,y);
+	 	 	 }else{
+	 	 	 	context.moveTo(x,y);
+	 	 	 	context.lineTo(x+w,y);
+	 	 	 	context.lineTo(x+w,y+h);
+	 	 	 	context.lineTo(x,y+h);
+	 	 	 }
+	 	 	 context.closePath();
+	 	 }
+
+	 	 //**去掉arc()方法所产生的那条不太美观的连接线
+	 	 //可以在调用arc()方法来绘制圆弧之前，先调用beginPath()
+	 	 //方法，调用此方法会将当期路径下的所有子路径都清除掉，
+	 	 //这样一来，arc()方法也就不会再绘制那条连接线了
+
+	 </script>
+</body>
+</html>
