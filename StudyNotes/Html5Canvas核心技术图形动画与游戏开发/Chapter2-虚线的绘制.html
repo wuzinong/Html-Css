@@ -35,6 +35,32 @@
 	 	 drawDashed(context,context.canvas.width-20,
 	 	 	context.canvas.height-20,20,context.canvas.height-20,15);
 	 	 drawDashed(context,20,context.canvas.height-20,20,20,2);
+
+	 	 //通过扩展CanvasRenderingContext2D来绘制虚线
+	 	 //（1）获取指向绘图环境对象中moveTo()方法的引用；
+	 	 //（2) 向Canvas绘图环境对象中新增一个名为lastMoveToLocation的属性
+	 	 //（3）重新定义绘图环境对象的moveTo()方法，将传给该方法的点保存到
+	 	 //lastMoveToLocation的属性之中
+	 	 CanvasRenderingContext2D.prototype.moveTo = function(x,y){
+	 	 	 moveToFunction.apply(context,[x,y]);
+	 	 	 this.lastMoveToLocation.x = x;
+	 	 	 this.lastMoveToLocation.y = y;
+	 	 }
+	 	 CanvasRenderingContext2D.prototype.dashedLineTo = function(x,y,dashLength){
+	 	 	dashLength = dashLength === undefined ? 5 : dashLength;
+	 	 	var startX = x - startX;
+	 	 	var startY = y - startY;
+	 	 	var deltaX = x-startX;
+	 	 	var deltaY = y-startY;
+	 	 	var numDashes = Math.floor(Math.sqrt(deltaX*deltaX+deltaY*deltaY)/dashLength);
+	 	 	for(var i=0;i<numDashes;++i){
+	 	 		 this[i%2===0 ? 'moveTo','lineTo']
+	 	 		 (
+	 	 		 	startX+(deltaX/numDashes)*i,
+	 	 		 	startY+(deltaY/numDashes)*i)
+	 	 	}
+	 	 	this.moveTo(x,y);
+	 	 }
 	 </script>
 </body>
 </html>

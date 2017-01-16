@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>赛贝尔曲线</title>
+	<style type="text/css">
+	     
+	</style>
+</head>
+<body>
+ 	
+	 <canvas id="canvas" width="800" height="520" style="margin:40px 40px;border:1px solid pink">
+	 	  Canvas not support
+	 </canvas>
+	 <script type="text/javascript">
+	 	 var canvas = document.getElementById("canvas"),
+	 	     context= canvas.getContext("2d");
+	 	 //二次方贝赛尔曲线(只向一个方向弯曲的简单曲线)
+	 	 context.fillStyle = 'cornflowerblue';
+	 	 context.strokeStyle='yellow';
+
+	 	 context.shadowColor = 'rgba(50,50,50,1)';
+	 	 context.shadowOffsetX = 2;
+	 	 context.shadowOffsetY = 2;
+	 	 context.shadowBlur = 4;
+
+	 	 context.lineWidth = 20;
+	 	 context.lineCap = 'round';
+
+	 	 context.beginPath();
+	 	 context.moveTo(120.5,130);
+	 	 context.quadraticCurveTo(150.8,130,160.6,150.5);
+	 	 context.quadraticCurveTo(190,250,210.5,160.5);
+	 	 context.quadraticCurveTo(240,100.5,290,70.5);
+
+	 	 context.stroke();
+
+	 	 // context.quadraticCurveTo(cpx,cpy,x,y);
+	 	 // 参数	描述
+		// cpx	贝塞尔控制点的 x 坐标
+		// cpy	贝塞尔控制点的 y 坐标
+		// x	结束点的 x 坐标
+		// y	结束点的 y 坐标
+	 </script>
+</body>
+</html>
