@@ -288,6 +288,16 @@
 	 	     }
 	 	     context.strokeStyle = strokeStyleSelect.value;
 
+
+	 	     //线段连接点绘制
+	 	     //如果linejoin属性设置为bevel，那么在两个线段相交的时候，将会用
+	 	     //一条直线来链接两个拐角外部的点，使之构成一个三角形。而
+	 	     //如果设置成miter，也就是lineJoin的默认值的话，那么效果
+	 	     //将与bevel相同，只是它还会再画一个三角形，使两个线段的结合处
+	 	     //变为一个矩形。最后如果将LineJoin属性设置为round，那么
+	 	     //两个线段的拐角处就会划伤一段填充好的圆弧
+	 	     //**当使用Miter时，还可以只等一个MiterLimit属性，它表示
+	 	     //斜接线（miter）的长度与二分之一线段的比值。
 	 </script>
 </body>
 </html>

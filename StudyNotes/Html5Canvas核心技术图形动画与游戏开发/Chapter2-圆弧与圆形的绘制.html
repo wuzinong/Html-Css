@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>圆弧与圆形的绘制</title>
+	<style type="text/css">
+	     
+	</style>
+</head>
+<body>
+ 	
+	 <canvas id="canvas" width="800" height="520" style="margin:40px 40px;border:1px solid pink">
+	 	  Canvas not support
+	 </canvas>
+	 <script type="text/javascript">
+	 	 //1. arc()方法的用法
+	 	 //arc(x,y,radius,startAngle,endAngel,counterClockwise)
+	 	 //e。g
+	 	 var canvas = document.getElementById("canvas");
+	 	 var context = canvas.getContext('2d');
+	 	 context.beginPath();
+	 	//context.moveTo(100,400);
+	 	 context.arc(canvas.width/2,canvas.height/4,80,Math.PI/4,
+	 	 	     Math.PI,false)
+	 	 context.strokeStyle="olive";
+	 	 context.stroke();
+	 </script>
+</body>
+</html>
