@@ -4,7 +4,18 @@
 	<meta charset="UTF-8">
 	<title>线段</title>
 	<style type="text/css">
-	     
+	    #canvas3{
+	       background:#fff;
+	       cursor:pointer;
+	       margin-left:10px;
+	       margin-top:10px;
+	       -box-shadow:4px 4px 8px rgba(0,0,0,0.5);
+	    }
+	    #controls{
+	       position: absolute;
+	       left:25px;
+	       top:25px;
+	    }
 	</style>
 </head>
 <body>
@@ -12,6 +23,29 @@
 	 <canvas id="canvas" width="1000" height="1520" style="margin:40px 40px;border:1px solid pink">
 	 	  Canvas not support
 	 </canvas>
+
+	 <canvas id="canvas2" width="1000" height="1520" style="margin:40px 40px;border:1px solid pink">
+	 	  Canvas not support
+	 </canvas>
+
+	  <canvas id="canvas3" width="1000" height="1520" style="margin:40px 40px;border:1px solid pink">
+	 	  Canvas not support
+	 </canvas>
+	 <div id="controls">
+	 	Stroke color: 
+	 	<select id="strokeStyleSelect">
+	 		<option value='red'>red</option>
+	 		<option value="green">green</option>
+	 		<option value="blue">blue</option>
+	 		<option value="orange">orange</option>
+	 		<option value="goldenrod">goldenrod</option>
+	 		<option value="navy">navy</option>
+	 		<option value="purple">purple</option>
+	 	</select>
+	 	Guidewires:
+	 	<input id="guidewireCheckbox" type="checkbox" checked/>
+	 	<input id="eraseAllButton" type="botton" value="Erase All"/>
+	 </div>
 	 <script type="text/javascript">
 	 	 //Canvas绘图环境提供了2个可以用来创建线性路径的方法：
 	 	 //moveTo()与lineTo()
@@ -55,6 +89,205 @@
 	 	 drawGrid(context,'gray',10,10);
 	 	 //这段代码将线段绘制在了2个像素之间的像素上，而且
 	 	 //绘制出来的线段仅有0.5像素宽
+	 	 
+	 	 //绘制坐标轴
+	 	 var canvas2 = document.getElementById("canvas2");
+	 	 var context = canvas2.getContext("2d");
+	 	 AXIS_MARGIN = 40,
+	 	 AXIS_ORIGIN = {x:AXIS_MARGIN,y:canvas2.height - AXIS_MARGIN},
+
+	 	 AXIS_TOP = AXIS_MARGIN,
+	 	 AXIS_RIGHT = canvas2.width - AXIS_MARGIN;
+
+	 	 HORIZONTAL_TICK_SPACING = 10,
+	 	 VERTICAL_TICK_SPACING = 10,
+	 	 AXIS_WIDTH = AXIS_RIGHT - AXIS_ORIGIN.x;
+	 	 AXIS_HEIGHT= AXIS_ORIGIN.y - AXIS_TOP,
+
+	 	 NUM_VERTICAL_TICKS = AXIS_HEIGHT/VERTICAL_TICK_SPACING,
+	 	 NUM_HORIZONTAL_TICKS = AXIS_WIDTH / HORIZONTAL_TICK_SPACING,
+
+	 	 TICK_WIDTH=10,
+	 	 TICKS_LINEWIDTH = 0.5,
+	 	 TICKS_COLOR='navy',
+
+	 	 AXIS_LINEWIDTH = 1.0,
+	 	 AXIS_COLOR = 'blue';
+
+	 	 function drawAxes(){
+	 	 	 context.save();
+	 	 	 context.strokeStyle = AXIS_COLOR;
+	 	 	 context.lineWidth = AXIS_LINEWIDTH;
+
+	 	 	 drawHorizontalAxis();
+	 	 	 drawVerticalAxis();
+
+	 	 	 context.lineWidth = 0.5;
+	 	 	 context.lineWidth = TICKS_LINEWIDTH;
+	 	 	 context.strokeStyle = TICKS_COLOR;
+
+	 	 	 drawVerticalAxisTicks();
+	 	 	 drawHorizontalAxisTicks();
+	 	 	 context.restore();
+	 	 }
+
+	 	 function drawHorizontalAxis(){
+	 	 	 context.beginPath();
+	 	 	 context.moveTo(AXIS_ORIGIN.x,AXIS_ORIGIN.y);
+	 	 	 context.lineTo(AXIS_RIGHT,AXIS_ORIGIN.y);
+	 	 	 context.stroke();
+	 	 }
+	 	 function drawVerticalAxis(){
+	 	 	 context.beginPath();
+	 	 	 context.moveTo(AXIS_ORIGIN.x,AXIS_ORIGIN.y);
+	 	 	 context.lineTo(AXIS_ORIGIN.x,AXIS_TOP);
+	 	 	 context.stroke();
+	 	 }
+	 	 function drawVerticalAxisTicks(){
+	 	 	 var deltaY;
+	 	 	 for(var i=1;i<NUM_VERTICAL_TICKS;++i){
+	 	 	 	 context.beginPath();
+	 	 	 	 if(i%5===0) deltaX = TICK_WIDTH;
+	 	 	 	 else deltaX = TICK_WIDTH/2;
+	 	 	 	 context.moveTo(AXIS_ORIGIN.x-deltaX,
+	 	 	 	 		        AXIS_ORIGIN.y-i*VERTICAL_TICK_SPACING
+	 	 	 	 )
+	 	 	 	 context.lineTo(AXIS_ORIGIN.x+deltaX,
+	 	 	 	 			   	AXIS_ORIGIN.y - i*VERTICAL_TICK_SPACING
+	 	 	 	 )
+	 	 	 	 context.stroke();
+	 	 	 }
+	 	 }
+	 	 function drawHorizontalAxisTicks(){
+	 	 	 var deltaY;
+	 	 	 for(var i=1;i<NUM_HORIZONTAL_TICKS;++i){
+	 	 	 	 context.beginPath();
+	 	 	 	 if(i%5===0) deltaY = TICK_WIDTH;
+	 	 	 	 else deltaY = TICK_WIDTH/2;
+	 	 	 	 context.moveTo(AXIS_ORIGIN.x + i*HORIZONTAL_TICK_SPACING,
+	 	 	 	 			    AXIS_ORIGIN.y - deltaY
+	 	 	 	 );
+	 	 	 	 context.lineTo(AXIS_ORIGIN.x +i*HORIZONTAL_TICK_SPACING,
+	 	 	 	 			   AXIS_ORIGIN.y  + deltaY
+	 	 	 	 )
+	 	 	 	 context.stroke();
+	 	 	 }
+	 	 }
+	 	 //drawGrid('lightgray',10,10);
+	 	 drawAxes();
+
+
+	 	 //橡皮筋式的线条绘制
+	 	 var canvas3 = document.getElementById("canvas3"),
+	 	     context = canvas3.getContext("2d"),
+	 	     eraseAllButton=document.getElementById('eraseAllButton'),
+	 	     strokeStyleSelect=document.getElementById('strokeStyleSelect'),
+	 	     guidewireCheckbox=document.getElementById('guidewireCheckbox'),
+	 	     drawingSurfaceImageData,
+	 	     mousedown = {},
+	 	     rubberbandRect = {},
+	 	     dragging = false,
+	 	     guidewires = guidewireCheckbox.checked;
+	 	     function windwoToCanvas(x,y){
+	 	     	 var bbox = canvas.getBoundingClientRect();
+	 	     	 return {
+	 	     	 	x:x-bbox.left * (canvas3.width / bbox.width),
+	 	     	 	y:y-bbox.top * (canvas3.height/bbox.height)
+	 	     	 }
+	 	     }
+	 	     function saveDrawingSurface(){
+	 	     	 drawingSurfaceImageData = context.getImageData(0,0,
+	 	     	 	canvas3.width,canvas3.height);
+	 	     }
+	 	     function restoreDrawingSurface(){
+	 	     	  context.putImageData(drawingSurfaceImageData,0,0);
+	 	     }
+	 	     function updateRubberbandRectangle(loc){
+	 	     	  rubberbandRect.width = Math.abs(loc.x-mousedown.x);
+	 	     	  rubberbandRect.height= Math.abs(loc.y-mousedown.y);
+	 	     	  if(loc.x>mousedown.x){
+	 	     	  	 rubberbandRect.left = mousedown.x;
+	 	     	  }else{
+	 	     	  	 rubberbandRect.left = loc.x;
+	 	     	  }
+	 	     	  if(loc.y>mousedown.y){
+	 	     	  	 rubberbandRect.top = mousedown.y
+	 	     	  }else{
+	 	     	  	 rubberbandRect.top = loc.y;
+	 	     	  }
+	 	     }
+	 	     function drawRubberbandShape(loc){
+	 	     	context.beginPath();
+	 	     	context.moveTo(mousedown.x,mousedown.y);
+	 	     	context.lineTo(loc.x,loc.y);
+	 	     	context.stroke();
+	 	     }
+	 	     function updateRubberband(loc){
+	 	     	updateRubberbandRectangle(loc);
+	 	     	drawRubberbandShape(loc);
+	 	     }
+
+	 	     //Guidewires
+	 	     function drawHorizontalLine(y){
+	 	     	 context.beginPath();
+	 	     	 context.moveTo(0,y+0.5);
+	 	     	 context.lineTo(canvas3.width,y+0.5);
+	 	     	 context.stroke();
+	 	     }
+	 	     function drawVerticalLine(x){
+	 	     	 context.beginPath();
+	 	     	 context.moveTo(x+0.5,0);
+	 	     	 context.lineTo(x+0.5,canvas3.height);
+	 	     	 context.stroke();
+	 	     }
+	 	     function drawGuidewires(x,y){
+	 	     	 context.save();
+	 	     	 context.strokeStyle = 'rgba(0,0,230,0.4)';
+	 	     	 context.lineWidth = 0.5;
+	 	     	 drawVerticalLine(x);
+	 	     	 drawHorizontalLine(y);
+	 	     	 context.restore();
+	 	     }
+	 	     //event handlers
+	 	     canvas3.onmousedown=function(e){
+	 	     	 var loc = windwoToCanvas(e.clientX,e.clientY);
+	 	     	 e.preventDefault();
+	 	     	 saveDrawingSurface();
+	 	     	 mousedown.x = loc.x;
+	 	     	 mousedown.y = loc.y;
+	 	     	 dragging = true;
+	 	     }
+	 	     canvas3.onmousemove=function(e){
+	 	     	var loc;
+	 	     	if(dragging){
+	 	     		e.preventDefault();
+	 	     		loc = windwoToCanvas(e.clientX,e.clientY);
+	 	     		restoreDrawingSurface();
+	 	     		updateRubberband(loc);
+	 	     		if(guidewires){
+	 	     			drawGuidewires(loc.x,loc.y);
+	 	     		}
+	 	     	}
+	 	     }
+	 	     canvas3.onmouseup = function(e){
+	 	     	 loc = windwoToCanvas(e.clientX,e.clientY);
+	 	     	 restoreDrawingSurface();
+	 	     	 updateRubberband(loc);
+	 	     	 dragging = false;
+	 	     }
+	 	     eraseAllButton.onclick = function(e){
+	 	     	 context.clearRect(0,0,canvas3.width,canvas3.height);
+	 	     	 // drawGrid('lightgray',10,10);
+	 	     	 saveDrawingSurface();
+	 	     }
+	 	     strokeStyleSelect.onchange =function(e){
+	 	     	 context.strokeStyle = strokeStyleSelect.value;
+	 	     };
+	 	     guidewireCheckbox.onchange =function(e){
+	 	     	 guidewires = guidewireCheckbox.checked;
+	 	     }
+	 	     context.strokeStyle = strokeStyleSelect.value;
+
 	 </script>
 </body>
 </html>
