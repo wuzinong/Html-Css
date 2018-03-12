@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body>
+    <div class="black">Flex 左边固定宽度右边自适应</div>
+    <section class="container1">
+        <div class="left">Left part</div>
+        <div class="right">Right part</div>
+    </section>
+
+    <div class="black">Float版 左边固定宽度右边自适应</div>
+    <section class="container2">
+            <div class="left">Left part</div>
+            <div class="right">Right part</div>
+    </section>
+
+    <div class="black">Flex 右边固定宽度右边自适应</div>
+    <section class="container3">
+            <div class="left">Left part</div>
+            <div class="right">Right part</div>
+    </section>
+
+    <div class="black">Float版 右边固定宽度右边自适应</div>
+    <section class="container4">
+            <div class="right">Right part</div>
+            <div class="left">Left part</div>
+    </section>
+
+    <div class="black">Flex 两列固定</div>
+    <section class="container5">
+        <div class="left">Left part</div>
+        <div class="main">main part</div>
+        <div class="right">Right part</div>
+    </section>
+
+    <div class="black">Float版 两列固定</div>
+    <section class="container6">
+        <div class="left">Left part</div>
+        <div class="right">Right part</div>
+        <div class="main">main part</div>
+    </section>
+    <div class="black">
+        <h2>About Flexbox</h2>
+        <p>*设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。</p>
+        <br/>
+        <h2>Flexbox 属性：</h2>
+        <ul>
+            <li>
+                <h3>flex-direction (主轴方向：row | row-reverse | column | column-reverse)</h3>
+                <p>row（默认值）：主轴为水平方向，起点在左端。</p>
+                <p>row-reverse：主轴为水平方向，起点在右端。</p>
+                <p>column：主轴为垂直方向，起点在上沿。</p>
+                <p>column-reverse：主轴为垂直方向，起点在下沿。</p>
+                <div class="flexDirection">
+                    <div>
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                    </div>
+                    <div>
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                    </div>
+                    <div>
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                    </div>
+                    <div>
+                         <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <h3>flex-wrap (排列在一行或如何换行nowrap | wrap | wrap-reverse;)</h3>
+                <div class="flexWrap">
+                    <div>
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>6</span>
+                        <span>7</span>
+                        <span>8</span>
+                        <span>9</span>
+                        <span>10</span>
+                        <span>11</span>
+                        <span>12</span>
+                        <span>13</span>
+                        <span>14</span>
+                        <span>15</span>
+                        <span>16</span>
+                    </div>
+                    <div>
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>6</span>
+                        <span>7</span>
+                        <span>8</span>
+                        <span>9</span>
+                        <span>10</span>
+                        <span>11</span>
+                        <span>12</span>
+                        <span>13</span>
+                        <span>14</span>
+                        <span>15</span>
+                        <span>16</span>
+                    </div>
+                    <div>
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>6</span>
+                        <span>7</span>
+                        <span>8</span>
+                        <span>9</span>
+                        <span>10</span>
+                        <span>11</span>
+                        <span>12</span>
+                        <span>13</span>
+                        <span>14</span>
+                        <span>15</span>
+                        <span>16</span>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</body>
+</html>
