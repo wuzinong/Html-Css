@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Effect</title>
+    <style>
+       *{
+          margin:0;
+          padding:0;
+       }
+       nav{
+           margin:200px auto;
+           width: 800px;
+       }
+       ul{
+           display: flex;
+           list-style: none;
+           text-align: center;
+       }
+       li{
+           flex:1 1 auto;
+           cursor:pointer; 
+       }
+       /* reference: http://eyehere.net/2015/css-sliding-underline/ */
+
+      /* 下划线从上到下出现 */
+       .sliding-u-t-b {
+            display: inline-block;
+        }
+        .sliding-u-t-b:after {
+            content: '';
+            display: block;
+            height: 0;
+            width: 100%;
+            background: transparent;
+            transition: height .5s ease, background-color .5s ease;
+        }
+        .sliding-u-t-b:hover:after {
+            height: 3px;
+            background: blue;
+        }
+
+        /* 下划线从下到上出现 */
+        .sliding-u-b-t {
+            display: inline-block;
+            position: relative;
+        }
+        .sliding-u-b-t:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 0px;
+            width: 100%;
+            background: transparent;
+            -webkit-transition: all ease 0.5s;
+            -moz-transition: all ease 0.5s;
+            transition: all ease 0.5s;
+        }
+        .sliding-u-b-t:hover:after {
+            height: 3px;
+            background: blue;
+        }
+
+        /* 下划线从左到右出现 */
+        .sliding-u-l-r {
+            display: inline-block;
+        }
+        .sliding-u-l-r:after {
+            content: '';
+            display: block;
+            height: 3px;
+            width: 0;
+            background: transparent;
+            transition: width .5s ease, background-color .5s ease;
+        }
+        .sliding-u-l-r:hover:after {
+            width: 100%;
+            background: blue;
+        }
+
+
+        /* 下划线从右到左出现 */
+        .sliding-u-r-l {
+            display: inline-block;
+            position: relative;
+            padding-bottom: 3px;
+        }
+        .sliding-u-r-l:after {
+            content: '';
+            display: block;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 3px;
+            width: 0;
+            background: transparent;
+            transition: width .5s ease, background-color .5s ease;
+        }
+        .sliding-u-r-l:hover:after {
+            width: 100%;
+            background: blue;
+        }
+       
+        /* 下划线两边伸展 */
+
+       .sliding-middle-out {
+            display: inline-block;
+            position: relative;
+            padding-bottom: 3px;
+        }
+       .sliding-middle-out:after {
+            content: '';
+            display: block;
+            margin: auto;
+            height: 3px;
+            width: 0px;
+            background: transparent;
+            transition: width .5s ease, background-color .5s ease;
+        }
+        .sliding-middle-out:hover:after {
+            width: 100%;
+            background: blue;
+        }
+
+        /* 下划线滑进滑出 */
+
+        .sliding-u-l-r-l {
+            display: inline-block;
+            position: relative;
+            padding-bottom: 3px;
+        }
+        .sliding-u-l-r-l:before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 0;
+            transition: width 0s ease, background .5s ease;
+        }
+        .sliding-u-l-r-l:after {
+            content: '';
+            display: block;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 3px;
+            width: 0;
+            background: blue;
+            transition: width .5s ease;
+        }
+        .sliding-u-l-r-l:hover:before {
+            width: 100%;
+            background: blue;
+            transition: width .5s ease;
+        }
+        .sliding-u-l-r-l:hover:after {
+            width: 100%;
+            background: transparent;
+            transition: all 0s ease;
+        }
+
+        /* 下划线反向滑进滑出 */
+        .sliding-u-l-r-l-inverse {
+            display: inline-block;
+            position: relative;
+            padding-bottom: 3px;
+        }
+        .sliding-u-l-r-l-inverse:before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 100%;
+            transition: width 0s ease;
+        }
+        .sliding-u-l-r-l-inverse:after {
+            content: '';
+            display: block;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 3px;
+            width: 100%;
+            background: blue;
+            transition: width .5s ease;
+        }
+        .sliding-u-l-r-l-inverse:hover:before {
+            width: 0%;
+            background: blue;
+            transition: width .5s ease;
+        }
+        .sliding-u-l-r-l-inverse:hover:after {
+            width: 0%;
+            background: transparent;
+            transition: width 0s ease;
+        }
+
+        .test{
+            width:300px;
+            margin:30px auto;
+            text-align: center;
+        }
+        .test:after{
+            content:'';
+            margin:auto;
+            display: block;
+            height: 3px;
+            width:10px;
+            background:red;
+            transition: width .5s ease, background-color .5s ease;
+        }
+        .test:hover:after{
+            width: 100%;
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+   <nav>
+       <ul>
+           <li class="sliding-u-t-b">test1</li>
+           <li class="sliding-u-b-t">test2</li>
+           <li class="sliding-u-l-r">test3</li>
+           <li class="sliding-u-r-l">test4</li>
+           <li class="sliding-middle-out">test5</li>
+           <li class="sliding-u-l-r-l">test6</li>
+           <li class="sliding-u-l-r-l-inverse">test7</li>
+       </ul>
+   </nav> 
+
+   <div class="test">tttttttttttttt</div>
+</body>
+</html>
