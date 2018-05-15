@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      *{
+          margin: 0;
+          padding:0;
+      }
+      section{
+          width:1200px;
+          margin:100px auto;
+      }
+      .block_one{
+          width:400px;
+          border:1px olive dashed;
+      }
+      .float_box{
+          float:left;
+          border:1px pink dashed;
+          padding:15px;
+          margin:0 10px 0 0;
+      }
+      .bfc_trigger{
+          overflow: auto;
+      }
+      .block_two{
+          margin-top:20px;
+          width:800px;
+          background-color:#ccc;
+      }
+      .block_two p{
+        padding: 0;
+        margin:  20px 0;
+        background-color: rgb(233,78,119);
+        color: #fff;
+      }
+    </style>
+</head>
+<body>
+   <section>
+      <div class="block_one">
+          <div class="float_box">I'm a float box</div>
+          <p class="demo_text">
+              I'm some texts in the box and this demo is
+              to show the BFC I'm some texts in the box and this demo is
+              to show the BFC I'm some texts in the box and this demo is
+              to show the BFC I'm some texts in the box and this demo is
+              to show the BFC
+          </p>
+      </div>
+      <div style="clear:both;"></div>
+      <a style="margin-top:10px;display:inline-block;" href="javascript:void(0)" class="deleteWords">delete</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a style="margin-top:10px;display:inline-block;" href="javascript:void(0)" class="addWords">add</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a style="margin-top:10px;display:inline-block;" href="javascript:void(0)" class="triggerBfc">triggerBfc</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a style="margin-top:10px;display:inline-block;" href="javascript:void(0)" class="triggerBfcFortext">triggerBfcFortext</a>
+   
+      <div class="block_two">
+         <p>I have a margin top and bottom of 20px;</p>
+         <p>I have a margin top and bottom of 20px;</p>
+      </div>
+      <a style="margin-top:10px;display:inline-block;" href="javascript:void(0)" class="triggerBfc2">triggerBfc</a>
+    </section>
+
+   <script> 
+      window.onload = function(){
+          var deleteWords = document.querySelector(".deleteWords");
+          var addWords = document.querySelector(".addWords");
+          var triggerBfc = document.querySelector(".triggerBfc");
+          var triggerBfc2 = document.querySelector(".triggerBfc2");
+          var textElem = document.querySelector(".demo_text");
+          var block_one = document.querySelector(".block_one");
+          var block_two = document.querySelector(".block_two");
+          var triggerBfcFortext = document.querySelector(".triggerBfcFortext");
+          var text = textElem.innerHTML;
+          deleteWords.addEventListener("click",function(){
+            textElem.innerHTML = "I'm some texts in the box";
+          });
+          addWords.addEventListener("click",function(){
+            textElem.innerHTML = text;
+          });
+          triggerBfc.addEventListener("click",function(){
+              block_one.classList.toggle("bfc_trigger");
+          });
+          triggerBfc2.addEventListener("click",function(){
+              block_two.classList.toggle("bfc_trigger");
+          });
+          triggerBfcFortext.addEventListener("click",function(){
+            textElem.classList.toggle("bfc_trigger");
+          });
+      }
+   </script>
+</body>
+</html>
