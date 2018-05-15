@@ -14,6 +14,9 @@
       html,body,.swiper-container,.swiper-wrapper{
           height:100%;
       }
+      .hide{
+          display: none;
+      }
       .swiper-slide{
           padding:0 30px;
       }
@@ -71,9 +74,54 @@
           50%{transform: rotateY(180deg)}
           100%{border-radius: 50%;background-color:lightgreen;}
       }
+      dl{
+          display: flex;
+          padding:15px 0;
+          cursor: pointer;
+      }
+      dt{
+          width:250px;
+      }
+      dd{
+          flex:1 1 auto;
+      }
+      #delay{
+          border:1px solid green;
+          width:500px;
+          height:500px;
+      }
+      #demoEle{
+          display: inline-block;
+          width:50px;
+          height:50px;
+          background-color:chocolate;
+          margin:30px 0 0 0;
+      }
+
+      .delayAnimation{
+        animation-name:delayAnimation;
+        animation-delay: 2s;
+        animation-duration: 5s;
+      }
+
+      @keyframes delayAnimation
+        {
+        0%   {background: red; transform:translate(0,0)}
+        25%  {background: yellow; transform:translate(200px,0)}
+        50%  {background: blue; transform:translate(200px,200px)}
+        75%  {background: green; transform:translate(0,200px)}
+        100% {background: red; transform:translate(0,0)}
+        }
+
+
     </style>
 </head>
 <body>
+
+    <div class="" id="delay">
+        <span id="demoEle" class="delayAnimation">Delay demo</span>
+    </div>
+
     <div class="swiper-container">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
@@ -105,17 +153,62 @@
                               <span class="shage_change"></span>
                           </div>
                       </div>
-                      <a href="AnimationDemo/index.html">Demo</a>
+                      
                   </div>
-                  <div class="swiper-slide">slider2</div>
-                  <div class="swiper-slide">slider3</div>
+                  <div class="swiper-slide">
+                        <h2 class="center">Attributes</h2>
+                        <div class="attr-name">
+                            <dl>
+                                <dt>animation-name:</dt>
+                                <dd>Specifies the name of the @keyframes at-rule describing the animation’s keyframes.</dd>
+                            </dl>
+                            <dl id="attrDelay">
+                               <dt>animation-delay:</dt>
+                               <dd>Configures the delay between the time the element is loaded and the beginning of the animation sequence.</dd>
+                            </dl>
+                            <dl>
+                                <dt>animation-direction:</dt>
+                                <dd>Configures whether or not the animation should alternate direction on each run through the sequence or reset to the start point and repeat itself.</dd>
+                             </dl>
+                             <dl>
+                                <dt>animation-duration:</dt>
+                                <dd>Configures the length of time that an animation should take to complete one cycle.</dd>
+                             </dl>
+                             <dl>
+                                <dt>animation-iteration-count:</dt>
+                                <dd>Configures the number of times the animation should repeat; you can specify infinite to repeat the animation indefinitely.</dd>
+                             </dl>
+                             <dl>
+                                <dt>animation-play-state:</dt>
+                                <dd>Lets you pause and resume the animation sequence.</dd>
+                            </dl>
+                            <dl>
+                                 <dt>animation-timing-function:</dt>
+                                 <dd>Configures the timing of the animation; that is, how the animation transitions through keyframes, by establishing acceleration curves.</dd>
+                            </dl>
+                            <dl>
+                                <dt>animation-fill-mode:</dt>
+                                <dd>Configures what values are applied by the animation before and after it is executing.</dd>
+                            </dl>
+                        </div>
+                  </div>
+                  <div class="swiper-slide" style="padding-top:200px;">
+                      Demo：<br>
+                      <a href="AnimationDemo/index.html">Demo</a><br><br><br>
+                      References:<br>
+                      <a href="http://www.w3school.com.cn/css3/css3_animation.asp">W3cschool</a><br>
+                  </div>
                 </div>
         <div class="swiper-pagination swiper-pagination-bullets"></div>
     </div>
-    <script src="./js/swiper.min.js"></script>
 
+
+
+    <script src="./js/swiper.min.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/layer/layer.js"></script>
     <script>
-            var mySwiper = new Swiper('.swiper-container', {
+         var mySwiper = new Swiper('.swiper-container', {
                 autoplay: false,//可选选项，自动滑动
                 direction : 'vertical',
                 width:"100%",
@@ -124,7 +217,19 @@
                     clickable:true
                 },
                 uniqueNavElements: false,
+            });
+
+         ;(function(){
+            var attrDelay = $("#attrDelay");
+            attrDelay.on("click",function(){
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['1000px', '750px'], //宽高
+                    content: $(".hide").html()
+                  });
             })
+         })(window,document);
     </script>
 </body>
 </html>
