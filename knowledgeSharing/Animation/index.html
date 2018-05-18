@@ -23,11 +23,7 @@
       .center{
           text-align: center;
       }
-      p{
-          width:80%;
-          margin:0 auto;
-          text-indent: 20px;
-      }
+
       h2{
           padding:15px 0;
       }
@@ -75,27 +71,44 @@
           100%{border-radius: 50%;background-color:lightgreen;}
       }
       dl{
-          display: flex;
+          display: table;
           padding:15px 0;
           cursor: pointer;
       }
       dt{
+          display: table-cell;
           width:250px;
       }
       dd{
-          flex:1 1 auto;
+        display: table-cell;
       }
       #delay{
           border:1px solid green;
           width:500px;
           height:500px;
       }
+     .handler{
+          padding:10px 15px;
+      }
+      .handler input[type='number']{
+          width:40px;
+      }
+      .handler button{
+          width:100px;
+          margin: 20px auto;
+          display: block;
+      }
+      .layui-layer-content{
+          padding:0 15px;
+      }
+
       #demoEle{
           display: inline-block;
           width:50px;
           height:50px;
           background-color:chocolate;
-          margin:80px 0 0 0;
+          margin:30px 0 0 0;
+          position: relative;
       }
 
       .delayAnimation{
@@ -110,18 +123,29 @@
         25%  {background: yellow; transform:translate(200px,0)}
         50%  {background: blue; transform:translate(200px,200px)}
         75%  {background: green; transform:translate(0,200px)}
-        100% {background: red; transform:translate(0,0)}
+        100% {background: red; transform:translate(0,400px)}
         }
-
+        
 
     </style>
 </head>
 <body>
 
-    <div class="" id="delay">
-        <input type="range" value="1">
-        <a href="javascript:void(0)"></a>
-        <span id="demoEle" class="delayAnimation">Delay demo</span>
+    <div class="hide" id="delay">
+        <div class="handler">
+            Delay:&nbsp;<input class="delay" type="number">s
+            Duration:&nbsp;<input class="duration" type="number">s
+            <br>
+            IterationCount:&nbsp;<input class="IterationCount" placeholder="infinite" type="text">
+            <br>
+            Direction:&nbsp;<input class="Direction" type="text">alternate alternate-reverse reverse normal
+            <br>
+            FillModel:&nbsp;<input class="FillModel" type="text">both,forwards,backwards,none
+            <br>
+            <button class="startPause">Start/Pause</button>
+            <button class="handleSettings">Go</button>
+        </div>
+        <span id="demoEle" class="">Delay demo</span>
     </div>
 
     <div class="swiper-container">
@@ -159,44 +183,64 @@
                   </div>
                   <div class="swiper-slide">
                         <h2 class="center">Attributes</h2>
-                        <div class="attr-name">
+                        <div class="attr-name" id="attrDelay">
                             <dl>
                                 <dt>animation-name:</dt>
-                                <dd>Specifies the name of the @keyframes at-rule describing the animation’s keyframes.</dd>
+                                <dd><p>Specifies the name of the @keyframes at-rule describing the animation’s keyframes.</p></dd>
                             </dl>
-                            <dl id="attrDelay">
+                            <dl>
                                <dt>animation-delay:</dt>
-                               <dd>Configures the delay between the time the element is loaded and the beginning of the animation sequence.</dd>
+                               <dd><p>Configures the delay between the time the element is loaded and the beginning of the animation sequence.</p></dd>
+                            </dl>
+                            <dl>
+                                  <dt>animation-duration:</dt>
+                                  <dd><p>Configures the length of time that an animation should take to complete one cycle.</p>
+                                 </dd>
+                                 
+                            </dl>
+                            <dl>
+                                 <dt>animation-iteration-count:</dt>
+                                 <dd><p>Configures the number of times the animation should repeat; you can specify infinite to repeat the animation indefinitely.</p></dd>
                             </dl>
                             <dl>
                                 <dt>animation-direction:</dt>
-                                <dd>Configures whether or not the animation should alternate direction on each run through the sequence or reset to the start point and repeat itself.</dd>
+                                <dd>
+                                    <p>Configures whether or not the animation should alternate direction on each run through the sequence or reset to the start point and repeat itself.</p>
+                                    <p>
+                                            <strong>normal</strong>
+                                            The animation plays forwards each cycle. In other words, each time the animation cycles, the animation will reset to the beginning state and start over again. This is the default value.
+                                    </p>
+                                    <p>
+                                        <strong>reverse</strong>
+                                        The animation plays backwards each cycle. In other words, each time the animation cycles, the animation will reset to the end state and start over again. Animation steps are performed backwards, and timing functions are also reversed. For example, an ease-in timing function becomes ease-out.
+                                    </p>
+                                    <p>
+                                        <strong>alternate</strong>
+                                        The animation reverses direction each cycle, with the first iteration being played forwards. The count to determine if a cycle is even or odd starts at one.
+                                    </p>
+                                    <p>
+                                        <strong>alternate-reverse</strong>   
+                                        The animation reverses direction each cycle, with the first iteration being played backwards. The count to determinate if a cycle is even or odd starts at one.</p>
+                                </dd>
                              </dl>
-                             <dl>
-                                <dt>animation-duration:</dt>
-                                <dd>Configures the length of time that an animation should take to complete one cycle.</dd>
-                             </dl>
-                             <dl>
-                                <dt>animation-iteration-count:</dt>
-                                <dd>Configures the number of times the animation should repeat; you can specify infinite to repeat the animation indefinitely.</dd>
-                             </dl>
+                         
                              <dl>
                                 <dt>animation-play-state:</dt>
-                                <dd>Lets you pause and resume the animation sequence.</dd>
+                                <dd><p>Lets you pause and resume the animation sequence.</p></dd>
                             </dl>
                             <dl>
                                  <dt>animation-timing-function:</dt>
-                                 <dd>Configures the timing of the animation; that is, how the animation transitions through keyframes, by establishing acceleration curves.</dd>
+                                 <dd><p>Configures the timing of the animation; that is, how the animation transitions through keyframes, by establishing acceleration curves.</p></dd>
                             </dl>
                             <dl>
                                 <dt>animation-fill-mode:</dt>
-                                <dd>Configures what values are applied by the animation before and after it is executing.</dd>
+                                <dd><p>Configures what values are applied by the animation before and after it is executing.</p></dd>
                             </dl>
                         </div>
                   </div>
                   <div class="swiper-slide" style="padding-top:200px;">
                       Demo：<br>
-                      <a href="AnimationDemo/index.html">Demo</a><br><br><br>
+                      <a target="_blank" href="AnimationDemo/index.html">Demo</a><br><br><br>
                       References:<br>
                       <a href="http://www.w3school.com.cn/css3/css3_animation.asp">W3cschool</a><br>
                   </div>
@@ -230,8 +274,54 @@
                     area: ['1000px', '750px'], //宽高
                     content: $(".hide").html()
                   });
+                  bindingEvent();
             })
          })(window,document);
+
+         function bindingEvent(){
+
+            $(".layui-layer").on("click",".handleSettings",function(){
+                var delay = $(".layui-layer .delay").val();
+                var duration = $(".layui-layer .duration").val();
+                var IterationCount = $(".layui-layer .IterationCount").val();
+                var Direction = $(".layui-layer .Direction").val();
+                var FillModel = $(".layui-layer .FillModel").val();
+                var ele = $(".layui-layer #demoEle");
+                ele.removeClass("delayAnimation");
+                
+                if(delay){
+                   ele.css("animation-delay",delay+"s");
+                }
+                if(duration){
+                   ele.css("animation-duration",duration+"s");
+                }
+                if(IterationCount){
+                   ele.css("animation-iteration-count",IterationCount);
+                }
+                if(Direction){
+                    ele.css("animation-direction",Direction);
+                 }
+                if(FillModel){
+                    ele.css("animation-fill-mode",FillModel);
+                }
+                var timeout = setTimeout(function(){
+                   ele.addClass("delayAnimation");
+                },200);
+            });
+
+
+
+            $(".layui-layer").on("click",".startPause",function(){
+                var ele = $(".layui-layer #demoEle");
+                var state = ele.css("animation-play-state");
+                if(state=="" || state == "paused"){
+                    ele.css("animation-play-state","running");
+                }else{
+                    ele.css("animation-play-state","paused");
+                }
+            })
+         }
+
     </script>
 </body>
 </html>
