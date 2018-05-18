@@ -125,7 +125,10 @@
         75%  {background: green; transform:translate(0,200px)}
         100% {background: red; transform:translate(0,400px)}
         }
-        
+        .col{
+            width:250px;
+            text-align: left;
+        }
 
     </style>
 </head>
@@ -229,12 +232,82 @@
                                 <dd><p>Lets you pause and resume the animation sequence.</p></dd>
                             </dl>
                             <dl>
-                                 <dt>animation-timing-function:</dt>
-                                 <dd><p>Configures the timing of the animation; that is, how the animation transitions through keyframes, by establishing acceleration curves.</p></dd>
+                                <dt>animation-fill-mode:</dt>
+                                <dd>
+                                    <p>Configures what values are applied by the animation before and after it is executing.</p>
+                                    <p><strong>none</strong>The animation will not apply any styles to the target when it's not executing. The element will instead be displayed using any other CSS rules applied to it. This is the default value.</p>
+                                    <p><strong>forwards</strong>The target will retain the computed values set by the last keyframe encountered during execution. The last keyframe depends on the value of animation-direction and animation-iteration-count</p>
+                                    <p>
+                                            <table class="standard-table">
+                                                    <thead>
+                                                     <tr>
+                                                      <th class="col">animation-direction</th>
+                                                      <th class="col">animation-iteration-count</th>
+                                                      <th class="col">last keyframe encountered</th>
+                                                     </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                     <tr>
+                                                      <td><code>normal</code></td>
+                                                      <td>even or odd</td>
+                                                      <td><code>100%</code> or <code>to</code></td>
+                                                     </tr>
+                                                     <tr>
+                                                      <td><code>reverse</code></td>
+                                                      <td>even or odd</td>
+                                                      <td><code>0%</code> or <code>from</code></td>
+                                                     </tr>
+                                                     <tr>
+                                                      <td><code>alternate</code></td>
+                                                      <td>even</td>
+                                                      <td><code>0%</code> or <code>from</code></td>
+                                                     </tr>
+                                                     <tr>
+                                                      <td><code>alternate</code></td>
+                                                      <td>odd</td>
+                                                      <td><code>100%</code> or <code>to</code></td>
+                                                     </tr>
+                                                     <tr>
+                                                      <td><code>alternate-reverse</code></td>
+                                                      <td>even</td>
+                                                      <td><code>100%</code> or <code>to</code></td>
+                                                     </tr>
+                                                     <tr>
+                                                      <td><code>alternate-reverse</code></td>
+                                                      <td>odd</td>
+                                                      <td><code>0%</code> or <code>from</code></td>
+                                                     </tr>
+                                                    </tbody>
+                                                   </table>
+                                    </p>
+
+                                    <p><strong>backwards</strong>The animation will apply the values defined in the first relevant keyframe as soon as it is applied to the target, and retain this during the animation-delay period. The first relevant keyframe depends on the value of animation-direction</p>
+                                    <p>
+                                            <table class="standard-table">
+                                                    <thead>
+                                                     <tr>
+                                                      <th class="col">animation-direction</th>
+                                                      <th class="col">first relevant keyframe</th>
+                                                     </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                     <tr>
+                                                      <td><code>normal</code> or <code>alternate</code></td>
+                                                      <td><code>0%</code> or <code>from</code></td>
+                                                     </tr>
+                                                     <tr>
+                                                      <td><code>reverse</code> or <code>alternate-reverse</code></td>
+                                                      <td><code>100%</code> or <code>to</code></td>
+                                                     </tr>
+                                                    </tbody>
+                                                   </table>
+                                    </p>
+                                    <p><strong>both</strong>The animation will follow the rules for both forwards and backwards, thus extending the animation properties in both directions.</p>
+                                </dd>
                             </dl>
                             <dl>
-                                <dt>animation-fill-mode:</dt>
-                                <dd><p>Configures what values are applied by the animation before and after it is executing.</p></dd>
+                                 <dt>animation-timing-function:</dt>
+                                 <dd><p>Configures the timing of the animation; that is, how the animation transitions through keyframes, by establishing acceleration curves.</p></dd>
                             </dl>
                         </div>
                   </div>
@@ -243,6 +316,7 @@
                       <a target="_blank" href="AnimationDemo/index.html">Demo</a><br><br><br>
                       References:<br>
                       <a href="http://www.w3school.com.cn/css3/css3_animation.asp">W3cschool</a><br>
+                      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode">Animation</a>
                   </div>
                 </div>
         <div class="swiper-pagination swiper-pagination-bullets"></div>
