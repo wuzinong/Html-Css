@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rem</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        html,body{
+            width:100%;
+            height:100%;
+        }
+
+        section{
+            max-width: 640px;
+            margin:20px auto;
+        }
+        div{
+           border:1px solid purple;
+           width:7rem;
+           height:3rem;
+           font-size: 14px;
+           margin:0 auto;
+        }
+    </style>
+</head>
+<body>
+
+        <section>
+                <div>
+                    test div
+                </div>
+       </section>
+
+
+   
+    <script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+        
+                    docEl.style.fontSize = clientWidth/10 + 'px';
+                    docEl.style.display = "none";
+                    docEl.clientWidth; // Force relayout - important to new Android devices
+                    docEl.style.display = "";
+                };
+        
+            // Abort if browser does not support addEventListener
+            if (!doc.addEventListener) return;
+        
+            // Test rem support
+            var div = doc.createElement('div');
+            div.setAttribute('style', 'font-size: 1rem');
+        
+            // Abort if browser does not recognize rem
+            if (div.style.fontSize != "1rem") return;
+        
+            win.addEventListener('resize', recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+</body>
+</html>
