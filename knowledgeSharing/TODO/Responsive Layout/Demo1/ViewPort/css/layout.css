@@ -1,0 +1,104 @@
+#header{ width: 1002px; height: auto; margin: 0 auto; padding-top: 140px; position: relative;}
+#logo{ position: absolute; left: 0; top: 0; width: 557px; height: 109px;}
+#top-link{ position: absolute; top: 10px; right: 0;}
+#top-link a{ margin-left: 10px;}
+#header .search{ position: absolute; right: 0; top: 100px;}
+.search .search-input{ height: 15px; padding:4px 3px; border:1px solid #ccc; vertical-align: top;}
+.search .search-btn{ vertical-align: top;}
+
+.btn{ display: inline-block; *zoom:1;*display: inline; height: 17px; background: url(../images/btn_bg01.png) repeat-x;
+	padding:0 10px; line-height: 17px; color: #fff; font-weight: normal; box-shadow: 0 0 3px #ccc;}
+.btn.large{ height: 25px; line-height:25px; background: url(../images/btn_large_01.png) repeat-x;}
+.btn:hover{ text-decoration: none;}
+.btn.register-btn{ width: 110px; height: 25px; text-align: center;}
+#nav{ height: 44px; padding-top: 4px; background: url(../images/nav_bg.png) repeat-x; padding-left: 50px;}
+.nav-list{ }
+.nav-list li{ float: left; width: 142px; height: 39px;}
+.nav-list li a{ display: block; height: 39px; line-height: 39px; color: #fff; font-size: 16px; text-shadow:0 0 1px #fff;}
+.nav-list li a:hover,.nav-list li.hover a{ text-decoration: none; background: url(../images/nav_hover.png) no-repeat;}
+
+#footer{ width: 1002px; height: 50px; padding-top: 15px; line-height: 25px; margin: 10px auto 0 auto; box-shadow: 0 -2px 2px #ccc;}
+#footer a{ color: #444; margin: 0 5px;}
+
+#main{ width: 1002px; margin: 10px auto 0 auto;}
+#content{ width: 712px; height: 100%; margin-right: 10px;}
+#sidebar{ float: right; width: 270px; height: auto;}
+
+#hot-screen{ height: 200px; padding: 5px; border:1px solid #ccc;}
+
+.clous-box{ float: left; width: 340px; height:304px; padding: 5px; border:1px solid #ccc; margin-top: 8px; }
+.clous-box.left{ margin-right: 8px;}
+.clous-head{ height: 32px; line-height: 32px; text-indent: 20px;color: #fff; text-align: left; font-size: 14px;
+	background-image: linear-gradient(bottom, rgb(230,3,3) 16%, rgb(255,0,0) 92%);
+	background-image: -o-linear-gradient(bottom, rgb(230,3,3) 16%, rgb(255,0,0) 92%);
+	background-image: -moz-linear-gradient(bottom, rgb(230,3,3) 16%, rgb(255,0,0) 92%);
+	background-image: -webkit-linear-gradient(bottom, rgb(230,3,3) 16%, rgb(255,0,0) 92%);
+	background-image: -ms-linear-gradient(bottom, rgb(230,3,3) 16%, rgb(255,0,0) 92%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.16, rgb(230,3,3)),
+		color-stop(0.92, rgb(255,0,0))
+	);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e00000', endColorstr='#f00000', GradientType=0);
+	*zoom:1;
+}
+.clous-head a{ display: block; color: #fff;  background: url(../images/icon01.png) no-repeat 95% center;}
+.clous-head a:hover{ text-decoration: none;}
+.clous-list{ margin-top: 10px; margin-left: 15px;}
+.clous-list li{ line-height: 25px; font-size: 14px; text-align: left; padding-left: 25px;
+	background: url(../images/icon02.png) no-repeat left center;}
+.clous-box .video{ width: 315px; height: 206px; margin: 15px auto 0 auto;}	
+.clous-box .video-name{ font-size: 14px; margin:15px 15px; text-align: left; line-height: 30px;}
+.clous-box .video-name .time{ float: right; font-size: 12px; color: #ccc; font-weight: normal;}
+.clous-box .video-name .topic{ font-weight: normal; margin-left: 10px; font-size: 12px;}
+
+.consultation-topic{ margin-top: 30px; font-size: 14px;}
+.consultation-topic .ratio { margin-left: 50px; margin-top: 10px;line-height: 30px; font-weight: bold;}
+.consultation-topic .ratio dt{ float: left; width: 100px; }
+.consultation-topic .ratio dd{ margin-left: 100px; }
+.consultation-topic .ratio em{ color: #e00000;}
+
+#introduce p{ text-align: left; line-height: 22px; font-size: 14px; text-indent: 20px; margin:15px;}
+.booksearch { margin-top: 10px;}
+.booksearch .search-input{ width: 210px;}
+.index-expert-video .video{ width: 240px; margin:15px auto;}
+.index-expert-video .expert-name{ font-weight: bold;}
+.index-expert-video p{ text-align: left; font-size: 14px; margin:0 15px;}
+.index-expert-video .video-time{ font-size: 12px; color: #ccc;}
+
+#min-sidebar{float: left; width: 270px;}
+#min-content{ margin-left: 290px; border:1px solid #ccc; padding: 5px; text-align: left;}
+
+#min-nav dl dt{ height: 30px; line-height: 30px; color: #fff; text-align: left; text-indent: 20px; font-size: 14px;
+	cursor: pointer;
+	background-image: linear-gradient(bottom, rgb(230,3,3) 16%, rgb(255,0,0) 92%);
+	background-image: -o-linear-gradient(bottom, rgb(230,3,3) 16%, rgb(255,0,0) 92%);
+	background-image: -moz-linear-gradient(bottom, rgb(230,3,3) 16%, rgb(255,0,0) 92%);
+	background-image: -webkit-linear-gradient(bottom, rgb(230,3,3) 16%, rgb(255,0,0) 92%);
+	background-image: -ms-linear-gradient(bottom, rgb(230,3,3) 16%, rgb(255,0,0) 92%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.16, rgb(230,3,3)),
+		color-stop(0.92, rgb(255,0,0))
+	);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e00000', endColorstr='#f00000', GradientType=0);
+	*zoom:1;
+}
+.icon{ padding: 4px;  margin-right: 5px;}
+.icon.minus{background: url(../images/icon03.png) no-repeat left center;}
+.icon.plus{background: url(../images/icon04.png) no-repeat left center;}
+.min-nav-list li{ line-height: 28px; height: 28px; text-align: left; text-indent: 30px; border-bottom: 1px dashed #ccc;
+	font-size: 14px;}
+.min-nav-list li a{ display: block;}
+.min-nav-list li a:hover,.min-nav-list li.active a{ background: #f2f2f2; text-decoration: none; font-weight: bold;}
+
+#login{ width: 300px; height: auto; border: 1px solid #000;}
+#login .control-wrap { margin-top: 10px; line-height: 24px;}
+#login .control-wrap input{ width: 150px; border: 1px solid #ccc; padding:3px;}
+#login .func{ margin-top: 20px;}
