@@ -17,6 +17,10 @@ html,body{
     height:100%;
     font-size: 12px;
 }
+.myContainer{
+    margin:0 auto;
+    max-width:800px;
+}
 
 
 #timeArea{
