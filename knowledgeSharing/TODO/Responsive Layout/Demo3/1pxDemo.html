@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rem</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        html,body{
+            width:100%;
+            height:100%;
+        }
+
+        section{
+            max-width: 640px;
+            margin:20px auto;
+        }
+        .div1{
+           border:1px solid purple;
+           width:7rem;
+           height:3rem;
+           font-size: 14px;
+           margin:0 auto;
+        }
+
+
+        @media only screen and (-webkit-min-device-pixel-ratio:3){
+            .div1{
+                border:.333px solid purple;
+            }
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio:2){
+            .div1{
+                border:.5px solid purple;
+            }
+        }
+    </style>
+</head>
+<body>
+
+        <section>
+                <div class="div1">
+                  
+                </div>
+
+       </section>
+
+
+    
+</body>
+</html>
