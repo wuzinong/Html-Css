@@ -13,29 +13,31 @@
        body{
            margin:40px;
        }
-       .wrapper{
-           display:flex;
-           border:1px solid green;
-           height: 300px;
-           justify-content: center;
-           align-items: center;
+       .grid-container{
+           display:grid;
+           grid-template-columns:1fr 6fr 1fr;
+           grid-gap:1rem;
        }
-       .wrapper div{
-           display: inline-block;
-           width:30px;
-           height:30px;
-           background-color:olive;
+       .grid-item{
+           background:lightsalmon;
+           height:50px;
        }
+       .grid-item:first-child{
+           grid-column:1/4;
+       }
+        
         
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
+    <div class="grid-container">
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
     </div>
 </body>
 </html>
