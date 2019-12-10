@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        script[src]:not([async]) {
+        display: block;
+        width: 100%;
+        height: 1em;
+        background-color: red;
+        }
+        script:after {
+        content: attr(src);
+        }
+
+        [OnMouseOver] {
+        color: burlywood;
+        }
+        [OnMouseOver]:after {
+        content: "JS: " attr(OnMouseOver);
+        }
+    </style>
+</head>
+<body>
+     <div>test div</div>
+     <script src="test.js"></script>
+     <script>
+        window.onload = function(){
+            document.body.addEventListener("mouseover",function(){
+                console.log("sdf")
+            })
+            //this shows not be shown
+        }
+     </script>
+</body>
+</html>
