@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi line</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      p {
+        margin: 0;
+      }
+      .con {
+        width: 800px;
+        margin: 50px auto;
+        border-radius: 8px;
+        padding: 15px;
+        overflow: hidden;
+        resize: horizontal;
+        box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+      }
+      .wrap {
+        position: relative;
+        line-height: 1.5;
+        height: 1.5em;
+        overflow: hidden;
+      }
+      .txt {
+        display: block;
+        max-height: 3em;
+      }
+      .title {
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        background-color: #fff;
+        position: relative;
+        top: -3em;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="con">
+        <p class="wrap">
+          <span class="txt"
+            >元素会被移出正常文档流。绝对定位的元素可以设置外边距（margins），且不会与其他边距合并。</span
+          >
+          <span
+            class="title"
+            title="元素会被移出正常文档流。绝对定位的元素可以设置外边距（margins），且不会与其他边距合并。"
+            >元素会被移出正常文档流。绝对定位的元素可以设置外边距（margins），且不会与其他边距合并。</span
+          >
+        </p>
+      </div>
+    </section>
+
+    <!-- <p>https://juejin.cn/post/6966042926853914654</p> -->
+  </body>
+</html>
