@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #spreadsheet {
+        display: block;
+        width: 500px; /* 表格宽度 */
+        height: 250px; /* 表格高度 */
+        position: relative;
+        background-image: linear-gradient(to right, black 1px, transparent 1px),
+          linear-gradient(to bottom, black 1px, transparent 1px);
+        background-size: 100px 50px; /* 每个单元格 100px x 50px */
+        cursor: pointer;
+      }
+
+      .cell {
+        position: absolute;
+        width: 100px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px; /* 垂直居中 */
+        font-size: 16px;
+        border: 1px solid transparent; /* 边框透明以保持一致 */
+      }
+
+      #cell-input {
+        position: absolute;
+        width: 100px;
+        height: 50px;
+        border: 1px solid black;
+        font-size: 16px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="spreadsheet"></div>
+    <input type="text" id="cell-input" style="display: none" />
+    <script>
+      const spreadsheet = document.getElementById('spreadsheet');
+      const cellInput = document.getElementById('cell-input');
+      let currentCell = null;
+
+      // 创建25个单元格，并使用span来显示内容
+      for (let i = 0; i < 5; i++) {
+        // 5行
+        for (let j = 0; j < 5; j++) {
+          // 5列
+          const cell = document.createElement('div');
+          cell.className = 'cell';
+          cell.style.left = `${j * 100}px`; // 每列100px
+          cell.style.top = `${i * 50}px`; // 每行50px
+          cell.dataset.key = `${j}-${i}`; // 设置单元格的唯一标识
+          cell.textContent = ''; // 初始化为空
+          spreadsheet.appendChild(cell);
+        }
+      }
+
+      // 点击单元格，显示输入框
+      spreadsheet.addEventListener('click', (event) => {
+        const cell = event.target;
+        if (cell.classList.contains('cell')) {
+          const cellKey = cell.dataset.key;
+
+          // 显示输入框并设置位置
+          cellInput.style.left = `${cell.offsetLeft}px`;
+          cellInput.style.top = `${cell.offsetTop}px`;
+          cellInput.style.display = 'block';
+          cellInput.focus();
+
+          // 显示当前单元格的内容
+          cellInput.value = cell.textContent;
+
+          currentCell = cell; // 当前单元格引用
+        }
+      });
+
+      // 输入框失去焦点时，保存数据并更新单元格内容
+      cellInput.addEventListener('blur', () => {
+        if (currentCell) {
+          currentCell.textContent = cellInput.value; // 更新单元格内容
+          cellInput.style.display = 'none'; // 隐藏输入框
+        }
+      });
+    </script>
+  </body>
+</html>

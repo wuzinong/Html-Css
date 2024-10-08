@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #spreadsheet {
+        display: grid;
+        grid-template-columns: repeat(5, 100px); /* 5列，每列100px宽 */
+        grid-template-rows: repeat(5, 50px); /* 5行，每行50px高 */
+        gap: 2px; /* 单元格之间的间距 */
+        background-color: lightgray; /* 表格背景颜色 */
+        width: max-content;
+        border: 1px solid black;
+      }
+
+      #spreadsheet div {
+        background-color: white;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #spreadsheet div:hover {
+        background-color: #f0f0f0;
+      }
+
+      #spreadsheet div:focus {
+        outline: none;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="spreadsheet"></div>
+    <script>
+      const spreadsheet = document.getElementById('spreadsheet');
+
+      // 创建25个单元格
+      for (let i = 1; i <= 25; i++) {
+        const cell = document.createElement('div');
+        cell.contentEditable = true; // 允许单元格编辑
+        cell.textContent = ''; // 初始化单元格为空
+        spreadsheet.appendChild(cell);
+      }
+    </script>
+  </body>
+</html>
