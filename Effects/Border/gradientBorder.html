@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .btn1 {
+        position: relative;
+        width: 200px;
+        height: 50px;
+        margin: 20px;
+        border: none;
+      }
+      .bt1::after {
+        content: '';
+        background-image: linear-gradient(to right, #0066ff, #ff32d6);
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 50%;
+        right: 50%;
+        padding: 0.1em;
+        translate: -50% -36%;
+        z-index: -1;
+      }
+
+      .btn2 {
+        width: 200px;
+        height: 50px;
+        margin: 20px;
+        border-image: linear-gradient(to right, #0066ff, #ff32d6) 1 1 1 1; /* 可以只写1，控制上下左右，也可以分别控制，1，0 */
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <button class="btn1">test</button>
+
+      <button class="btn2">button 2</button>
+    </div>
+  </body>
+</html>
