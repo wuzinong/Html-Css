@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas
+      id="myCanvas"
+      width="500"
+      height="500"
+      style="border: 1px solid #000"
+    ></canvas>
+    <br />
+    <img src="./1.jpg" width="800px" alt="" />
+    <br />
+    <code id="hexOutput" style="max-height: 500px"></code>
+
+    <script>
+      const canvas = document.getElementById('myCanvas');
+
+      const ctx = canvas.getContext('2d');
+
+      // Create a new image object
+      const img = new Image();
+
+      // Set the source of the image
+      img.src = './1.jpg'; // Replace with your image path
+
+      // Draw the image on the canvas when it has loaded
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height); // Draw image at (0, 0) with full canvas size
+
+        // Get the image data from the canvas
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const hexOutput = document.getElementById('hexOutput');
+
+        // Convert pixel data to hex format
+        let hexString = '';
+        for (let i = 0; i < imageData.data.length; i += 4) {
+          // Get RGBA values
+          const r = imageData.data[i]; // Red
+          const g = imageData.data[i + 1]; // Green
+          const b = imageData.data[i + 2]; // Blue
+          const a = imageData.data[i + 3]; // Alpha
+
+          // Convert to hex and append to string
+          hexString += `#${((1 << 24) + (r << 16) + (g << 8) + a)
+            .toString(16)
+            .slice(1)}\n`;
+        }
+
+        // Output hex string
+        // hexOutput.textContent = hexString;
+        console.log(hexString);
+      };
+    </script>
+  </body>
+</html>
