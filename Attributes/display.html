@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .before {
+        background: orange;
+      }
+      .middle {
+        background: lightblue;
+      }
+      .after {
+        background: lightgreen;
+      }
+      /*display block会影响布局，但是有hover效果 */
+
+      /* .hover {
+        display: block;  
+      }
+      .hover:hover {
+        opacity: 0.5;
+      } */
+      /* 会忽略外层元素 使用display contents 但是因为hover的外层元素被忽略了，所以要改成对子元素进行操作，加个星号*/
+      .hover {
+        display: contents;
+      }
+      .hover:hover * {
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      display: block flow-root
+      生成一个块级格式化上下文，用于包含浮动元素，消除上下Margin
+    </h1>
+
+    <div class="wrapper">
+      <div class="before">before</div>
+      <div class="hover">
+        <div class="middle">middle</div>
+        <div class="after">after</div>
+        <div class="after">after</div>
+      </div>
+      <div class="after"></div>
+    </div>
+  </body>
+</html>
